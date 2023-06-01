@@ -9,11 +9,11 @@ export const LoginButton = () => {
 
     const headers = {
       "x-ibm-client-id": process.env.NEXT_PUBLIC_CLIENT_ID || "",
-      redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URL || "",
+      //   redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URL || "",
       state: state,
       "x-ibm-client-secret": process.env.NEXT_PUBLIC_CLIENT_SECRET || "",
       signature: "SKIP_SIGNATURE_VALIDATION_FOR_SANDBOX",
-      Accept: "application/json",
+      Accept: "*/*",
       "Content-Type": "application/json",
     };
 
