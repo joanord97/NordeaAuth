@@ -5,10 +5,12 @@ export const LoginButton = () => {
   const onClick = async (e: any) => {
     const url = "https://api.nordeaopenbanking.com/personal/v5/authorize";
 
+    const state = generateRandomString(16);
+
     const headers = {
       "x-ibm-client-id": process.env.NEXT_PUBLIC_CLIENT_ID || "",
       redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URL || "",
-      state: "fakeState",
+      state: state,
       "x-ibm-client-secret": process.env.NEXT_PUBLIC_CLIENT_SECRET || "",
       signature: "SKIP_SIGNATURE_VALIDATION_FOR_SANDBOX",
       Accept: "application/json",
@@ -34,7 +36,7 @@ export const LoginButton = () => {
         "CARDS_TRANSACTIONS",
         "PAYMENTS_MULTIPLE",
       ],
-      state: "fakeState",
+      state: state,
     };
 
     const result = await fetch(url, {
@@ -50,3 +52,14 @@ export const LoginButton = () => {
 
   return <button onClick={onClick}>Login</button>;
 };
+
+function generateRandomString(length: number) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
